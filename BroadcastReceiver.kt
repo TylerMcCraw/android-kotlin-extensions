@@ -10,6 +10,32 @@ import android.net.ConnectivityManager
  *
  * Created by Tyler McCraw on 8/2/17.
  */
+
+/**
+ * Generic registerReceiver extension to reduce boilerplate
+ *
+ * Call this like so:
+ * val myReceiver = registerReceiver(IntentFilter(BROADCAST_SOMETHING_HAPPENED)) {
+ *     when (intent?.action) {
+ *         BROADCAST_SOMETHING_HAPPENED -> handleSomethingHappened()
+ *     }
+ * }
+ * 
+ * Call this extension from your Activity's onStart(), keep a reference
+ * to the returned receiver and unregister it in onStop()
+ *
+ * Note: If you support devices on Honeycomb or earlier,
+ * then you must call this in onResume() and unregister in onPause()
+ */
+fun Context.registerReceiver(intentFilter: IntentFilter, onReceive: (intent: Intent?) -> Unit): BroadcastReceiver {
+    val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent?) {
+            onReceive(intent)
+        }
+    }
+    this.registerReceiver(receiver, intentFilter)
+    return receiver
+}
  
 /**
  * Register a BroadcastReceiver which is guaranteed to
