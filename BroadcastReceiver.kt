@@ -1,4 +1,3 @@
-
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -20,7 +19,7 @@ import android.net.ConnectivityManager
  *         BROADCAST_SOMETHING_HAPPENED -> handleSomethingHappened()
  *     }
  * }
- * 
+ *
  * Call this extension from your Activity's onStart(), keep a reference
  * to the returned receiver and unregister it in onStop()
  *
@@ -36,7 +35,7 @@ fun Context.registerReceiver(intentFilter: IntentFilter, onReceive: (intent: Int
     this.registerReceiver(receiver, intentFilter)
     return receiver
 }
- 
+
 /**
  * Register a BroadcastReceiver which is guaranteed to
  * receive change events when the network connects and disconnects
