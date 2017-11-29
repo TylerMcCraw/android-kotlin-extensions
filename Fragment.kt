@@ -24,21 +24,65 @@ inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
 }
 
 /**
- * Replace a fragment in a container view
+ * Add a fragment in a container view
  *
- * @param containerViewId id of container view
- * @param fragment fragment to use as replacement
+ * @param containerViewId Optional identifier of the container this fragment is
+ * to be placed in.  If 0, it will not be placed in a container.
+ * @param fragment The fragment to be added.  This fragment must not already
+ * be added to the activity.
+ * @param tag Optional tag name for the fragment, to later retrieve the
+ * fragment with {@link FragmentManager#findFragmentByTag(String)
+ * FragmentManager.findFragmentByTag(String)}.
  */
-fun android.support.v4.app.FragmentManager.replaceFragment(@IdRes containerViewId: Int, fragment: android.support.v4.app.Fragment) {
-    beginTransaction().replace(containerViewId, fragment).commit()
+fun android.support.v4.app.FragmentManager.addFragment(@IdRes containerViewId: Int,
+        fragment: android.support.v4.app.Fragment, tag: String? = null) {
+    beginTransaction().add(containerViewId, fragment, tag).commit()
+}
+
+/**
+ * Add a fragment in a container view
+ *
+ * @param containerViewId Optional identifier of the container this fragment is
+ * to be placed in.  If 0, it will not be placed in a container.
+ * @param fragment The fragment to be added.  This fragment must not already
+ * be added to the activity.
+ * @param tag Optional tag name for the fragment, to later retrieve the
+ * fragment with {@link FragmentManager#findFragmentByTag(String)
+ * FragmentManager.findFragmentByTag(String)}.
+ */
+fun android.app.FragmentManager.addFragment(@IdRes containerViewId: Int,
+        fragment: android.app.Fragment, tag: String? = null) {
+    beginTransaction().add(containerViewId, fragment, tag).commit()
 }
 
 /**
  * Replace a fragment in a container view
  *
- * @param containerViewId id of container view
- * @param fragment fragment to use as replacement
+ * @param containerViewId Optional identifier of the container this fragment is
+ * to be placed in.  If 0, it will not be placed in a container.
+ * @param fragment The fragment to be added.  This fragment must not already
+ * be added to the activity.
+ * @param tag Optional tag name for the fragment, to later retrieve the
+ * fragment with {@link FragmentManager#findFragmentByTag(String)
+ * FragmentManager.findFragmentByTag(String)}.
  */
-fun android.app.FragmentManager.replaceFragment(@IdRes containerViewId: Int, fragment: android.app.Fragment) {
-    beginTransaction().replace(containerViewId, fragment).commit()
+fun android.support.v4.app.FragmentManager.replaceFragment(@IdRes containerViewId: Int,
+        fragment: android.support.v4.app.Fragment, tag: String? = null) {
+    beginTransaction().replace(containerViewId, fragment, tag).commit()
+}
+
+/**
+ * Replace a fragment in a container view
+ *
+ * @param containerViewId Optional identifier of the container this fragment is
+ * to be placed in.  If 0, it will not be placed in a container.
+ * @param fragment The fragment to be added.  This fragment must not already
+ * be added to the activity.
+ * @param tag Optional tag name for the fragment, to later retrieve the
+ * fragment with {@link FragmentManager#findFragmentByTag(String)
+ * FragmentManager.findFragmentByTag(String)}.
+ */
+fun android.app.FragmentManager.replaceFragment(@IdRes containerViewId: Int,
+        fragment: android.app.Fragment, tag: String? = null) {
+    beginTransaction().replace(containerViewId, fragment, tag).commit()
 }
